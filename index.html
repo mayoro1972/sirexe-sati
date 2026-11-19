@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SATI · Hub IA — SIREXE 2026</title>
+<meta name="description" content="SATI développe les applications de vos sites (hydrocarbures, énergie, mines) et IAtise vos processus avec son hub IA.">
+<meta name="theme-color" content="#14213D">
+<style>
+  :root{
+    --navy:#14213D; --navy-2:#22335A; --accent:#E8772E; --accent-2:#F0A874;
+    --teal:#A9531A; --bg:#F6F3EE; --card:#FFFFFF; --text:#14243A; --muted:#5B6B80;
+    --ok:#1F9D55; --err:#C0392B; --radius:16px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+       background:var(--bg);color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:var(--navy-2)}
+  .wrap{max-width:640px;margin:0 auto;padding:0 18px}
+
+  /* Header */
+  header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 70%,#2A3D66 100%);color:#fff;padding:22px 0 34px;position:relative;overflow:hidden}
+  header::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;
+       background:radial-gradient(circle,rgba(242,140,40,.35),transparent 70%)}
+  .brand{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;letter-spacing:.04em}
+  .brand b{font-size:15px;letter-spacing:.08em}
+  .pill{display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);padding:4px 10px;border-radius:999px;font-size:12px}
+  h1{font-size:28px;line-height:1.15;margin:22px 0 10px;font-weight:800}
+  h1 span{color:var(--accent-2)}
+  .lead{color:#D6E3F2;margin:0 0 20px;font-size:16px}
+  .cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:#fff;border:0;
+       padding:14px 20px;border-radius:12px;font-weight:700;font-size:16px;text-decoration:none;cursor:pointer;width:100%}
+  .cta:active{transform:translateY(1px)}
+  .cta.secondary{background:#fff;color:var(--navy);border:1px solid #D5DEEA}
+  .cta.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4)}
+  .row{display:flex;gap:10px}
+  .row>*{flex:1}
+
+  section{padding:26px 0 6px}
+  h2{font-size:20px;margin:0 0 4px}
+  .sub{color:var(--muted);margin:0 0 16px;font-size:14px}
+
+  /* Value props */
+  .props{display:grid;grid-template-columns:1fr;gap:10px}
+  .prop{background:var(--card);border-radius:var(--radius);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;box-shadow:0 1px 3px rgba(11,42,74,.06)}
+  .ico{flex:0 0 40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:20px;background:#EAF2FB}
+  .prop h3{margin:0;font-size:15px}
+  .prop p{margin:2px 0 0;font-size:13.5px;color:var(--muted)}
+
+  /* Videos */
+  .videos{display:grid;gap:14px}
+  .video{background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:0 1px 3px rgba(11,42,74,.08)}
+  .player{position:relative;aspect-ratio:16/9;background:#0E1E33;display:grid;place-items:center;color:#9FB4CC;cursor:pointer}
+  .player iframe,.player video{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .play{width:62px;height:62px;border-radius:50%;background:var(--accent);display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+  .play::before{content:"";border-left:20px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px}
+  .player .soon{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:12px}
+  .player .dur{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;padding:2px 8px;border-radius:6px}
+  .vbody{padding:12px 16px 16px}
+  .vbody .tag{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--teal)}
+  .vbody h3{margin:2px 0 4px;font-size:16px}
+  .vbody p{margin:0;font-size:13.5px;color:var(--muted)}
+
+  /* Case study */
+  .case{background:linear-gradient(135deg,#FFF6EC,#FFFFFF);border:1px solid #FBD9B4;border-radius:var(--radius);padding:16px}
+  .case h3{margin:0 0 6px;font-size:16px}
+  .case ul{margin:6px 0 0;padding-left:18px;font-size:14px}
+  .case li{margin:3px 0}
+
+  /* Form */
+  form{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:0 1px 3px rgba(11,42,74,.08)}
+  .steps{display:flex;gap:6px;margin-bottom:14px}
+  .steps i{flex:1;height:4px;border-radius:4px;background:#E2E9F2}
+  .steps i.on{background:var(--accent)}
+  fieldset{border:0;margin:0;padding:0}
+  .step{display:none}
+  .step.active{display:block}
+  label{display:block;font-weight:600;font-size:14px;margin:12px 0 6px}
+  label .opt{font-weight:400;color:var(--muted);font-size:12px}
+  input[type=text],input[type=email],input[type=tel],input[type=date],select,textarea{
+    width:100%;padding:12px 14px;font-size:16px;border:1px solid #CBD6E3;border-radius:10px;background:#fff;color:var(--text);font-family:inherit}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--accent-2);border-color:var(--accent)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{position:relative}
+  .chip input{position:absolute;opacity:0;pointer-events:none}
+  .chip span{display:inline-block;padding:9px 12px;border:1px solid #CBD6E3;border-radius:999px;font-size:14px;cursor:pointer;background:#fff;user-select:none}
+  .chip input:checked+span{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .chip input:focus-visible+span{outline:2px solid var(--accent)}
+  .consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);margin-top:14px;font-weight:400}
+  .consent input{margin-top:3px;width:18px;height:18px;flex:0 0 18px}
+  .actions{display:flex;gap:10px;margin-top:18px}
+  .actions .cta{width:auto;flex:1}
+  .error{color:var(--err);font-size:13px;margin-top:8px;min-height:1em}
+  .hidden{display:none !important}
+
+  /* Thank you */
+  .thanks{text-align:center;padding:26px 18px}
+  .thanks .big{font-size:46px}
+  .thanks h2{font-size:22px}
+  .thanks .cta{margin-top:10px}
+
+  footer{color:var(--muted);font-size:12px;text-align:center;padding:30px 18px 50px}
+
+  /* Barre de l'agent commercial */
+  .standbar{position:sticky;top:0;z-index:20;background:#102A43;color:#fff;font-size:13px}
+  .standbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 18px}
+  .standbar button{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:6px 10px;font-size:12px;cursor:pointer}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);margin-right:6px}
+  .dot.off{background:var(--err)}
+
+  /* Admin panel */
+  dialog{border:0;border-radius:16px;padding:0;max-width:560px;width:calc(100% - 24px)}
+  dialog::backdrop{background:rgba(5,20,35,.6)}
+  .dlg{padding:18px}
+  .dlg h3{margin:0 0 6px}
+  .stat{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+  .stat div{background:var(--bg);border-radius:10px;padding:10px;text-align:center}
+  .stat b{display:block;font-size:22px}
+  .stat small{color:var(--muted)}
+  table{width:100%;border-collapse:collapse;font-size:12px}
+  th,td{text-align:left;padding:6px;border-bottom:1px solid #E6ECF3}
+  .tablewrap{max-height:240px;overflow:auto;margin-top:8px}
+
+  @media (min-width:700px){
+    h1{font-size:36px}
+    .props{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- Barre de l'agent commercial (visible uniquement en mode agent : ?mode=agent) -->
+<div class="standbar hidden" id="standbar">
+  <div class="wrap">
+    <div><span class="dot" id="netDot"></span><span id="standInfo">Mode agent</span></div>
+    <div class="row" style="flex:0 0 auto">
+      <button type="button" id="btnAdmin">Prospects (<span id="leadCount">0</span>)</button>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <b>SATI · HUB IA</b>
+      <span class="pill" id="eventPill">SIREXE 2026</span>
+    </div>
+    <h1>Vos applications métier. <span>Avec l'IA dedans.</span></h1>
+    <p class="lead">Hydrocarbures, énergie, mines : <b>SATI</b> développe les applications de vos sites et, avec son hub IA, automatise vos tâches répétitives et forme vos équipes. 3 vidéos courtes pour comprendre, un rendez-vous pour passer à l'action.</p>
+    <div class="row">
+      <a class="cta" href="#videos">▶ Voir les vidéos</a>
+      <a class="cta ghost" href="#contact">Être recontacté</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2>Ce que nous faisons pour vous</h2>
+    <p class="sub">SATI, éditeur ivoirien inscrit sur la plateforme Local Content.</p>
+    <div class="props">
+      <div class="prop"><div class="ico">🛢️</div><div><h3>Applications métier</h3><p>Stations et cuves, stocks et livraisons, rapports de site, HSE, sous-traitants : des outils construits pour vos sites.</p></div></div>
+      <div class="prop"><div class="ico">⚙️</div><div><h3>Automatisation des processus</h3><p>Rapports, rapprochements, devis, relances, reporting : le hub IA automatise ce qui vous fait perdre des heures.</p></div></div>
+      <div class="prop"><div class="ico">🎓</div><div><h3>Formation IA ciblée métiers</h3><p>Des parcours courts et pratiques adaptés à chaque fonction : opérations, HSE, finance, achats, RH, direction, DSI.</p></div></div>
+      <div class="prop"><div class="ico">🤖</div><div><h3>Assistants IA sur mesure</h3><p>Des agents IA connectés à vos outils et à vos documents, en français, qui respectent vos données.</p></div></div>
+      <div class="prop"><div class="ico">📈</div><div><h3>Résultats mesurables</h3><p>Diagnostic, pilote de 4 semaines sur un site, bilan chiffré, puis généralisation.</p></div></div>
+    </div>
+  </section>
+
+  <section id="videos">
+    <h2>3 vidéos courtes</h2>
+    <p class="sub">Un peu plus de 2 minutes au total. Regardez maintenant, ou laissez votre email pour les recevoir.</p>
+    <div class="videos" id="videoList"></div>
+  </section>
+
+  <section>
+    <div class="case">
+      <h3>📌 Déjà en action</h3>
+      <p style="margin:0;font-size:14px" id="caseText">Notre démarche a été déployée en novembre 2026 chez un distributeur pétrolier ivoirien.</p>
+      <ul id="caseList">
+        <li>Formation des équipes, métier par métier</li>
+        <li>Cartographie des processus par département</li>
+        <li>Pilote en station</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Recevez les vidéos & réservez un échange</h2>
+    <p class="sub">2 minutes. Un commercial SATI vous recontacte sous 24 h.</p>
+
+    <form id="leadForm" novalidate>
+      <div class="steps"><i class="on"></i><i></i><i></i></div>
+
+      <!-- Étape 1 : identité -->
+      <fieldset class="step active" data-step="1">
+        <label for="nom">Nom et prénom</label>
+        <input type="text" id="nom" name="nom" autocomplete="name" required>
+
+        <label for="entreprise">Entreprise / Stand</label>
+        <input type="text" id="entreprise" name="entreprise" autocomplete="organization" required>
+
+        <label for="fonction">Fonction <span class="opt">(facultatif)</span></label>
+        <input type="text" id="fonction" name="fonction" autocomplete="organization-title" placeholder="Ex. Directeur commercial">
+
+        <label for="email">Email professionnel</label>
+        <input type="email" id="email" name="email" autocomplete="email" inputmode="email" required>
+
+        <label for="telephone">Téléphone / WhatsApp</label>
+        <input type="tel" id="telephone" name="telephone" autocomplete="tel" inputmode="tel" placeholder="+225 07 00 00 00 00" required>
+        <div class="error" data-err="1"></div>
+        <div class="actions"><button type="button" class="cta" data-next>Continuer →</button></div>
+      </fieldset>
+
+      <!-- Étape 2 : besoins -->
+      <fieldset class="step" data-step="2">
+        <label for="secteur">Secteur d'activité</label>
+        <select id="secteur" name="secteur" required>
+          <option value="">— Choisir —</option>
+          <option>Pétrole et gaz (amont, raffinage, stockage)</option>
+          <option>Distribution de carburant / GPL</option>
+          <option>Mines</option>
+          <option>Électricité / Eau</option>
+          <option>Services pétroliers et miniers</option>
+          <option>Équipements et fournitures</option>
+          <option>Agro-industrie / Agriculture</option>
+          <option>Banque / Assurance / Microfinance</option>
+          <option>BTP / Immobilier</option>
+          <option>Commerce / Distribution</option>
+                    <option>Industrie / Transformation</option>
+          <option>Logistique / Transport / Transit</option>
+          <option>Santé</option>
+          <option>Télécoms / Numérique</option>
+          <option>Éducation / Formation</option>
+          <option>Administration / Secteur public</option>
+          <option>Autre</option>
+        </select>
+
+        <label for="taille">Taille de l'entreprise</label>
+        <select id="taille" name="taille">
+          <option value="">— Choisir —</option>
+          <option>1 à 10 personnes</option>
+          <option>11 à 50 personnes</option>
+          <option>51 à 250 personnes</option>
+          <option>Plus de 250 personnes</option>
+        </select>
+
+        <label>Qu'est-ce qui vous intéresse ?</label>
+        <div class="chips" id="interets">
+          <label class="chip"><input type="checkbox" name="interets" value="Application métier sur mesure"><span>🛢️ Application métier</span></label>
+          <label class="chip"><input type="checkbox" name="interets" value="Automatisation des processus"><span>⚙️ Automatisation</span></label>
+          <label class="chip"><input type="checkbox" name="interets" value="Formation IA des équipes"><span>🎓 Formation IA</span></label>
+          <label class="chip"><input type="checkbox" name="interets" value="Assistant / chatbot IA"><span>🤖 Assistant IA</span></label>
+          <label class="chip"><input type="checkbox" name="interets" value="Rapports de site et HSE"><span>🦺 Rapports et HSE</span></label>
+          <label class="chip"><input type="checkbox" name="interets" value="Reporting / tableaux de bord"><span>📊 Reporting</span></label>
+          <label class="chip"><input type="checkbox" name="interets" value="Stocks, écarts et contrôle"><span>📦 Stocks et écarts</span></label>
+        </div>
+
+        <label>Équipes à former en priorité <span class="opt">(facultatif)</span></label>
+        <div class="chips">
+          <label class="chip"><input type="checkbox" name="metiers" value="HSE"><span>HSE</span></label>
+          <label class="chip"><input type="checkbox" name="metiers" value="Achats"><span>Achats</span></label>
+          <label class="chip"><input type="checkbox" name="metiers" value="Informatique / DSI"><span>DSI</span></label>
+          <label class="chip"><input type="checkbox" name="metiers" value="Commercial"><span>Commercial</span></label>
+          <label class="chip"><input type="checkbox" name="metiers" value="RH"><span>RH</span></label>
+          <label class="chip"><input type="checkbox" name="metiers" value="Finance / Comptabilité"><span>Finance</span></label>
+          <label class="chip"><input type="checkbox" name="metiers" value="Marketing / Communication"><span>Marketing</span></label>
+          <label class="chip"><input type="checkbox" name="metiers" value="Logistique / Opérations"><span>Opérations</span></label>
+          <label class="chip"><input type="checkbox" name="metiers" value="Direction"><span>Direction</span></label>
+        </div>
+
+        <label for="besoin">Votre tâche la plus chronophage <span class="opt">(facultatif)</span></label>
+        <textarea id="besoin" name="besoin" rows="3" placeholder="Ex. rapports de site, suivi des stocks, comparaison de devis…"></textarea>
+        <div class="error" data-err="2"></div>
+        <div class="actions">
+          <button type="button" class="cta secondary" data-prev>← Retour</button>
+          <button type="button" class="cta" data-next>Continuer →</button>
+        </div>
+      </fieldset>
+
+      <!-- Étape 3 : suivi / RDV -->
+      <fieldset class="step" data-step="3">
+        <label>Que souhaitez-vous ?</label>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="suivi" value="Recevoir les vidéos par email" checked><span>📩 Recevoir les vidéos</span></label>
+          <label class="chip"><input type="radio" name="suivi" value="Rendez-vous proposition de service (45 min)"><span>📅 Un rendez-vous</span></label>
+          <label class="chip"><input type="radio" name="suivi" value="Démo avec un commercial SATI"><span>🖥️ Une démo en direct</span></label>
+        </div>
+
+        <div id="rdvBlock" class="hidden">
+          <label for="rdvDate">Date souhaitée</label>
+          <input type="date" id="rdvDate" name="rdvDate">
+          <label for="rdvCreneau">Créneau</label>
+          <select id="rdvCreneau" name="rdvCreneau">
+            <option>Matin (8h–12h)</option>
+            <option>Midi (12h–14h)</option>
+            <option>Après-midi (14h–18h)</option>
+          </select>
+          <label for="rdvFormat">Format</label>
+          <select id="rdvFormat" name="rdvFormat">
+            <option>Visio (Google Meet / Teams)</option>
+            <option>Dans vos locaux</option>
+            <option>Appel téléphonique / WhatsApp</option>
+          </select>
+        </div>
+
+        <label for="canal">Canal de suivi préféré</label>
+        <select id="canal" name="canal">
+          <option>Email</option>
+          <option>WhatsApp</option>
+          <option>Appel téléphonique</option>
+        </select>
+
+        <label class="consent">
+          <input type="checkbox" id="consent" name="consent" required>
+          <span>J'accepte que SATI utilise ces informations pour m'envoyer ses vidéos et me recontacter. Mes données ne sont pas revendues et je peux demander leur suppression à tout moment (loi n°2013-450 relative à la protection des données personnelles).</span>
+        </label>
+        <div class="error" data-err="3"></div>
+        <div class="actions">
+          <button type="button" class="cta secondary" data-prev>← Retour</button>
+          <button type="submit" class="cta" id="btnSubmit">Envoyer ✓</button>
+        </div>
+      </fieldset>
+    </form>
+
+    <!-- Remerciement -->
+    <div class="thanks hidden" id="thanks">
+      <div class="big">🎉</div>
+      <h2>Merci <span id="thxName"></span> !</h2>
+      <p class="sub" id="thxMsg">Les vidéos arrivent dans votre boîte email. Un commercial SATI vous recontacte sous 24 h.</p>
+      <a class="cta" id="btnBooking" href="#" target="_blank" rel="noopener">📅 Choisir mon créneau maintenant</a>
+      <a class="cta secondary" id="btnWhatsapp" href="#" target="_blank" rel="noopener">💬 Écrire à SATI sur WhatsApp</a>
+      <button type="button" class="cta secondary hidden" id="btnNext">➕ Nouveau prospect</button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © SATI — Société Africaine des Technologies de l'Information · Angré, Cocody, Abidjan<br>
+  <span id="footContact"></span>
+</footer>
+
+<!-- Panneau commercial -->
+<dialog id="adminDlg">
+  <div class="dlg">
+    <h3>Prospects collectés sur cet appareil</h3>
+    <p class="sub" style="margin:0">Les fiches sont gardées sur le téléphone même sans réseau et envoyées dès que la connexion revient.</p>
+    <div class="stat">
+      <div><b id="sTotal">0</b><small>total</small></div>
+      <div><b id="sSync">0</b><small>envoyés</small></div>
+      <div><b id="sPend">0</b><small>en attente</small></div>
+    </div>
+    <div class="row">
+      <button type="button" class="cta" id="btnSync">⟳ Envoyer</button>
+      <button type="button" class="cta secondary" id="btnCsv">⬇ Export CSV</button>
+    </div>
+    <div class="tablewrap"><table id="leadTable"><thead><tr><th>Heure</th><th>Nom</th><th>Entreprise</th><th>Suivi</th><th>État</th></tr></thead><tbody></tbody></table></div>
+    <div class="actions"><button type="button" class="cta secondary" id="btnClose">Fermer</button></div>
+  </div>
+</dialog>
+
+<script>
+/* =========================================================================
+   CONFIGURATION — à adapter avant le salon
+   ========================================================================= */
+const CONFIG = {
+  evenement: "SIREXE 2026",
+  // URL qui reçoit chaque prospect en JSON (POST). Ex : webhook n8n, Make, Zapier,
+  // Google Apps Script ou votre CRM. Laisser vide = stockage local + export CSV.
+  webhookUrl: "https://n8n-pxlk.srv1480638.hstgr.cloud/webhook/sirexe-lead-sati",
+  // Lien de prise de RDV en ligne (vide = le rendez-vous se fixe par WhatsApp)
+  bookingUrl: "",
+  // Numéro WhatsApp SATI au format international sans + ni espaces
+  whatsapp: "2250707391242",
+  emailContact: "satiinformation@sati.ci",
+  // Vidéos : lien YouTube/Vimeo (embed) ou fichier .mp4. Vide = « bientôt disponible ».
+  videos: [
+    { tag: "Présentation", titre: "SATI en 80 secondes",
+      texte: "Nos applications pour les hydrocarbures, l'énergie et les mines, le hub IA, les 6 processus et notre démarche.",
+      duree: "1:19", url: "videos/1_sati_presentation.mp4" },
+    { tag: "Format mobile", titre: "SATI en 30 secondes",
+      texte: "L'essentiel en format vertical, à partager sur WhatsApp.",
+      duree: "0:31", url: "videos/2_sati_presentation_mobile.mp4" },
+    { tag: "Équipe", titre: "Rencontrez nos commerciaux",
+      texte: "M. SIKA Ahui Jean Clément et M. KONAN Koffi Ange Parfait vous attendent au SIREXE 2026.",
+      duree: "0:17", url: "videos/3_sati_commerciaux.mp4" }
+  ],
+  // Agents commerciaux : code utilisé dans le QR (?c=CODE) → nom affiché en mode agent
+  commerciaux: {
+    "SA01": "M. SIKA Ahui Jean Clément",
+    "SA02": "M. KONAN Koffi Ange Parfait",
+    "EQUIPE": "Équipe SATI"
+  }
+};
+/* ========================================================================= */
+
+const params = new URLSearchParams(location.search);
+const codeCommercial = (params.get("c") || "").toUpperCase();
+const source = params.get("s") || (codeCommercial ? "qr-commercial" : "direct");
+const standMode = ["agent", "stand"].includes(params.get("mode"));   // « stand » accepté pour compatibilité
+const STORE_KEY = "sati_sirexe_leads";
+
+/* ---------- Vidéos ---------- */
+function toEmbed(url){
+  if(!url) return null;
+  let m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/|embed\/))([\w-]{11})/);
+  if(m) return {type:"iframe", src:`https://www.youtube-nocookie.com/embed/${m[1]}?autoplay=1&rel=0&playsinline=1`};
+  m = url.match(/vimeo\.com\/(\d+)/);
+  if(m) return {type:"iframe", src:`https://player.vimeo.com/video/${m[1]}?autoplay=1`};
+  if(/\.(mp4|webm|mov)(\?|$)/i.test(url)) return {type:"video", src:url};
+  return {type:"iframe", src:url};
+}
+function renderVideos(){
+  const list = document.getElementById("videoList");
+  CONFIG.videos.forEach((v,i)=>{
+    const card = document.createElement("article");
+    card.className = "video";
+    card.innerHTML = `
+      <div class="player" role="button" tabindex="0" aria-label="Lire : ${v.titre}">
+        <div class="play"></div>
+        <span class="dur">${v.duree}</span>
+        ${v.url ? "" : '<span class="soon">Vidéo bientôt disponible — laissez votre email pour la recevoir</span>'}
+      </div>
+      <div class="vbody"><div class="tag">${i+1} · ${v.tag}</div><h3>${v.titre}</h3><p>${v.texte}</p></div>`;
+    const player = card.querySelector(".player");
+    const play = ()=>{
+      const e = toEmbed(v.url);
+      if(!e){ document.getElementById("contact").scrollIntoView({behavior:"smooth"}); return; }
+      track("video_play", {video:v.titre});
+      player.innerHTML = e.type === "video"
+        ? `<video src="${e.src}" poster="${e.src.replace(/\.mp4$/,'.jpg')}" controls autoplay playsinline></video>`
+        : `<iframe src="${e.src}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+      player.onclick = null;
+    };
+    player.onclick = play;
+    player.onkeydown = e=>{ if(e.key==="Enter"||e.key===" "){e.preventDefault();play();} };
+    list.appendChild(card);
+  });
+}
+
+/* ---------- Formulaire multi-étapes ---------- */
+const form = document.getElementById("leadForm");
+const steps = [...form.querySelectorAll(".step")];
+const bars = [...form.querySelectorAll(".steps i")];
+let current = 0;
+
+function showStep(n){
+  steps.forEach((s,i)=>s.classList.toggle("active", i===n));
+  bars.forEach((b,i)=>b.classList.toggle("on", i<=n));
+  current = n;
+  form.scrollIntoView({behavior:"smooth", block:"start"});
+}
+function validateStep(n){
+  const err = form.querySelector(`[data-err="${n+1}"]`);
+  err.textContent = "";
+  const s = steps[n];
+  for(const el of s.querySelectorAll("[required]")){
+    if(el.type === "checkbox" ? !el.checked : !el.value.trim()){
+      err.textContent = el.id === "consent" ? "Merci d'accepter pour que nous puissions vous recontacter." : "Merci de compléter les champs obligatoires.";
+      el.focus(); return false;
+    }
+  }
+  if(n===0){
+    const email = form.email.value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ err.textContent = "Adresse email invalide."; form.email.focus(); return false; }
+    const tel = form.telephone.value.replace(/[^\d+]/g,"");
+    if(tel.replace(/\D/g,"").length < 8){ err.textContent = "Numéro de téléphone invalide."; form.telephone.focus(); return false; }
+  }
+  return true;
+}
+form.addEventListener("click", e=>{
+  if(e.target.matches("[data-next]") && validateStep(current)) showStep(current+1);
+  if(e.target.matches("[data-prev]")) showStep(current-1);
+});
+form.addEventListener("change", e=>{
+  if(e.target.name === "suivi"){
+    document.getElementById("rdvBlock").classList.toggle("hidden", !e.target.value.startsWith("Rendez-vous"));
+  }
+});
+document.getElementById("rdvDate").min = new Date().toISOString().slice(0,10);
+
+/* ---------- Stockage local + envoi ---------- */
+const loadLeads = ()=>{ try{ return JSON.parse(localStorage.getItem(STORE_KEY)) || []; }catch{ return []; } };
+const saveLeads = l => localStorage.setItem(STORE_KEY, JSON.stringify(l));
+
+function collect(){
+  const fd = new FormData(form);
+  return {
+    id: (crypto.randomUUID ? crypto.randomUUID() : Date.now()+"-"+Math.random().toString(16).slice(2)),
+    date: new Date().toISOString(),
+    evenement: CONFIG.evenement,
+    commercial_code: codeCommercial || null,
+    commercial_nom: CONFIG.commerciaux[codeCommercial] || null,
+    source,
+    nom: fd.get("nom").trim(),
+    entreprise: fd.get("entreprise").trim(),
+    fonction: (fd.get("fonction")||"").trim(),
+    email: fd.get("email").trim().toLowerCase(),
+    telephone: fd.get("telephone").trim(),
+    secteur: fd.get("secteur"),
+    taille: fd.get("taille"),
+    interets: fd.getAll("interets"),
+    metiers: fd.getAll("metiers"),
+    besoin: (fd.get("besoin")||"").trim(),
+    suivi: fd.get("suivi"),
+    rdv_date: fd.get("suivi").startsWith("Rendez-vous") ? fd.get("rdvDate") : null,
+    rdv_creneau: fd.get("suivi").startsWith("Rendez-vous") ? fd.get("rdvCreneau") : null,
+    rdv_format: fd.get("suivi").startsWith("Rendez-vous") ? fd.get("rdvFormat") : null,
+    canal: fd.get("canal"),
+    consentement: true,
+    videos_demandees: CONFIG.videos.map(v=>({titre:v.titre, url:v.url})),
+    synced: false
+  };
+}
+
+async function sendLead(lead){
+  if(!CONFIG.webhookUrl) return false;
+  const {synced, ...payload} = lead;
+  try{
+    const r = await fetch(CONFIG.webhookUrl, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload)});
+    return r.ok;
+  }catch{ return false; }
+}
+// Une seule synchronisation à la fois : évite d'envoyer deux fois la même fiche
+// (retour du réseau + envoi d'une nouvelle fiche au même moment).
+let syncEnCours = null, relancerSync = false;
+function marquerEnvoyee(id){
+  const all = loadLeads(); const x = all.find(l => l.id === id);
+  if(x){ x.synced = true; saveLeads(all); }
+}
+async function syncPending(){
+  if(syncEnCours){ relancerSync = true; return syncEnCours; }
+  syncEnCours = (async () => {
+    do {
+      relancerSync = false;
+      for(const l of loadLeads().filter(x => !x.synced)){
+        if(await sendLead(l)) marquerEnvoyee(l.id);
+      }
+    } while(relancerSync);
+  })();
+  try { await syncEnCours; } finally { syncEnCours = null; refreshAdmin(); }
+}
+
+form.addEventListener("submit", async e=>{
+  e.preventDefault();
+  if(!validateStep(2)) return;
+  const btn = document.getElementById("btnSubmit");
+  btn.disabled = true; btn.textContent = "Envoi…";
+  const lead = collect();
+  const leads = loadLeads(); leads.push(lead); saveLeads(leads);
+  await syncPending();
+  lead.synced = !!(loadLeads().find(l => l.id === lead.id) || {}).synced;
+  track("lead_submit", {suivi: lead.suivi});
+  showThanks(lead);
+  btn.disabled = false; btn.textContent = "Envoyer ✓";
+  refreshAdmin();
+});
+
+function showThanks(lead){
+  form.classList.add("hidden");
+  const t = document.getElementById("thanks");
+  t.classList.remove("hidden");
+  document.getElementById("thxName").textContent = lead.nom.split(" ")[0];
+  const msg = {
+    "Recevoir les vidéos par email": "Les vidéos SATI arrivent dans votre boîte email. Un commercial SATI vous recontacte sous 24 h.",
+    "Rendez-vous proposition de service (45 min)": "Votre demande de rendez-vous est enregistrée. Votre commercial vous confirme le créneau sous 24 h.",
+    "Démo avec un commercial SATI": "Un commercial SATI revient vers vous pour une démonstration, sur votre stand ou dans vos locaux."
+  }[lead.suivi];
+  document.getElementById("thxMsg").textContent = msg;
+  const bk = document.getElementById("btnBooking");
+  if(CONFIG.bookingUrl){ bk.href = CONFIG.bookingUrl; } else { bk.classList.add("hidden"); }
+  const wa = document.getElementById("btnWhatsapp");
+  const txt = `Bonjour SATI, je suis ${lead.nom} (${lead.entreprise}). Je vous ai rencontrés au ${CONFIG.evenement} et je souhaite fixer un rendez-vous.`;
+  wa.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(txt)}`;
+  if(standMode){ document.getElementById("btnNext").classList.remove("hidden"); wa.classList.add("hidden"); bk.classList.add("hidden"); }
+  t.scrollIntoView({behavior:"smooth"});
+}
+document.getElementById("btnNext").onclick = ()=>{
+  form.reset(); document.getElementById("rdvBlock").classList.add("hidden");
+  form.classList.remove("hidden"); document.getElementById("thanks").classList.add("hidden");
+  showStep(0); setTimeout(()=>form.nom.focus(), 300);
+};
+
+/* ---------- Mode agent / panneau de l'agent commercial ---------- */
+const dlg = document.getElementById("adminDlg");
+function refreshAdmin(){
+  const leads = loadLeads();
+  const sync = leads.filter(l=>l.synced).length;
+  document.getElementById("leadCount").textContent = leads.length;
+  document.getElementById("sTotal").textContent = leads.length;
+  document.getElementById("sSync").textContent = sync;
+  document.getElementById("sPend").textContent = leads.length - sync;
+  const tb = document.querySelector("#leadTable tbody"); tb.innerHTML = "";
+  leads.slice().reverse().forEach(l=>{
+    const tr = document.createElement("tr");
+    [new Date(l.date).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}), l.nom, l.entreprise, l.suivi.split(" ")[0], l.synced?"✓":"⏳"]
+      .forEach(v=>{ const td=document.createElement("td"); td.textContent=v; tr.appendChild(td); });
+    tb.appendChild(tr);
+  });
+}
+function exportCsv(){
+  const leads = loadLeads();
+  const cols = ["date","evenement","commercial_code","commercial_nom","source","nom","entreprise","fonction","email","telephone","secteur","taille","interets","metiers","besoin","suivi","rdv_date","rdv_creneau","rdv_format","canal","synced"];
+  const esc = v => `"${(Array.isArray(v)?v.join(" | "):(v??"")).toString().replace(/"/g,'""')}"`;
+  const csv = "﻿" + cols.join(";") + "\n" + leads.map(l=>cols.map(c=>esc(l[c])).join(";")).join("\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));
+  a.download = `prospects-sirexe-${codeCommercial||"agent"}-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+}
+function updateNet(){ document.getElementById("netDot").classList.toggle("off", !navigator.onLine); }
+
+if(standMode){
+  document.getElementById("standbar").classList.remove("hidden");
+  document.getElementById("standInfo").textContent = `Mode agent · ${CONFIG.commerciaux[codeCommercial] || codeCommercial || "SATI"}`;
+  document.getElementById("btnAdmin").onclick = ()=>{ refreshAdmin(); dlg.showModal(); };
+  document.getElementById("btnClose").onclick = ()=>dlg.close();
+  document.getElementById("btnSync").onclick = syncPending;
+  document.getElementById("btnCsv").onclick = exportCsv;
+  window.addEventListener("online", updateNet);
+  setInterval(syncPending, 60000);   // nouvel essai chaque minute : le réseau des salons est capricieux
+  window.addEventListener("offline", updateNet);
+  updateNet();
+}
+window.addEventListener("online", syncPending);
+
+/* ---------- Mesure simple (remplacer par GA4 / Plausible si besoin) ---------- */
+function track(name, data){ if(window.gtag) gtag("event", name, data); }
+
+/* ---------- Init ---------- */
+document.getElementById("eventPill").textContent = CONFIG.evenement;
+document.getElementById("footContact").innerHTML = `<a href="mailto:${CONFIG.emailContact}">${CONFIG.emailContact}</a>`;
+renderVideos();
+refreshAdmin();
+syncPending();
+</script>
+</body>
+</html>
